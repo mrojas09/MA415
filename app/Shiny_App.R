@@ -35,9 +35,13 @@ ui <- fluidPage(theme = shinytheme("slate"),
                                 selected = 'Big Bend'),
                     
                     br(),
+                    
+                    # Cnn Report Video that was provided to us via Blackboard 
                     h3("Trumps Border Wall Pledge"),
                     HTML('<iframe width="390" height="270" src="https://www.youtube.com/embed/lk99uQQGEok" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
                     br(),
+                    
+                    # Written Summary of the CNN report provided to us via Blackboard 
                     h4("US-Mexico boarder apprehensions have been steadily declining since 2000, and in April of 2017 they reached historic lows."), 
                     h4("These downward trends and record lows can be accredited to President Trump’s election. "),
                     h4("The data shows that President Trump’s aggression towards immigration laws is having a deterring effect, and migrants are less enticed to enter the country. "),
@@ -45,9 +49,12 @@ ui <- fluidPage(theme = shinytheme("slate"),
                     h4("Here you can find the monthly summaries of apprehensions by sector in a time series from 2000 to 2017 depicting the changes throughout time."),
                     br(),
             
+                    # Trump Cartoon Video
                     h5("Actual Trump Quotes Read by Cartoon Trump"),
                     HTML('<iframe width="390" height="270" src="https://www.youtube.com/embed/DREO6cwbGeQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
                     br(),
+                    
+                    #Logos
                     h5("Powered by: "),
                     tags$img(src= "RStudio-Ball.png",height = 50, width = 50, hspace = "10"), 
                     tags$img(src= "CNN-Logo.png",height = 60, width = 70, hspace = "10"),
@@ -63,11 +70,15 @@ ui <- fluidPage(theme = shinytheme("slate"),
                       tabPanel("Table", tableOutput("table"))
                       
                     ),
-                    br(),
-                    br(),
+                    
+                    br(),br(),
+                    
+                    #Video of Trump Singing "Do you want to build a wall" to Frozen background music
                     h3("Do You Want To Build a Wall? - Donald Trump (Frozen Parody)"),
                     HTML('<iframe width="890" height="540" src="https://www.youtube.com/embed/GVN17U3Vg34" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
                     br(),
+                    
+                    #Video Caption
                     h4('Whats the best way for United States president-elect Donald Trump to convince people that a wall between America and Mexico is a good idea?'),
                     h4('Why, a song in the style of Frozens "Do You Want To Build a Snowman?" of course.'),
                     h3('Enjoy!'),
@@ -101,7 +112,6 @@ server <- function(input, output) {
     else{
       return(ts1) # else returns summary data
     }
-    
     
   })
   
@@ -171,4 +181,3 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-
