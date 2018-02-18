@@ -1,7 +1,7 @@
 #
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
-#
+# 
 # Find out more about building applications with Shiny here:
 #
 #    http://shiny.rstudio.com/
@@ -9,6 +9,7 @@
 
 library(shiny)
 library(datasets)
+library(shinythemes)
 
 #import data from CSVs
 data2010 <- read.csv('BP Apprehensions 2010.csv')
@@ -19,31 +20,60 @@ ts2 <- as.vector(t(ts1))
 
 # Define UI for application
 
-ui <- fluidPage(
-  
-  #title
-  titlePanel("US-Mexico Boarder Patrol Apprehensions"),
-  
-  #sidebar where you can select the sector
-  sidebarLayout(
-    
-    sidebarPanel(
-      
-      selectInput('comp', 'Choose comparison', 
-                  choices = c('Monthly Summaries'= '10', 'Big Bend' = '1', 'Del Rio' = '2', 'El Centro' = '3', 'El Paso' = '4', 'Laredo' = '5', 'Rio Grande Valley' = '6', 'San Diego' = '7', 'Tuscon' = '8', 'Yuma' = '9'),
-                  selected = 'Big Bend')
-      
-     # includeText('writeup.txt')
-    ),
-    
-    #Location of barplot
-    mainPanel(
-      tabsetPanel(
-        tabPanel("Graph", plotOutput("appPlot", height = 500)),
-        tabPanel("Table", tableOutput("table"))
-      )
-    )
-  )
+ui <- fluidPage(theme = shinytheme("slate"),
+                
+                #title
+                titlePanel("US-Mexico Boarder Patrol Apprehensions"),
+                
+                #sidebar where you can select the sector
+                sidebarLayout(
+                  
+                  sidebarPanel(
+                    
+                    selectInput('comp', 'Choose comparison', 
+                                choices = c('Monthly Summaries'= '10', 'Big Bend' = '1', 'Del Rio' = '2', 'El Centro' = '3', 'El Paso' = '4', 'Laredo' = '5', 'Rio Grande Valley' = '6', 'San Diego' = '7', 'Tuscon' = '8', 'Yuma' = '9'),
+                                selected = 'Big Bend'),
+                    
+                    br(),
+                    h3("Trumps Border Wall Pledge"),
+                    HTML('<iframe width="390" height="270" src="https://www.youtube.com/embed/lk99uQQGEok" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
+                    br(),
+                    h4("US-Mexico boarder apprehensions have been steadily declining since 2000, and in April of 2017 they reached historic lows."), 
+                    h4("These downward trends and record lows can be accredited to President Trump’s election. "),
+                    h4("The data shows that President Trump’s aggression towards immigration laws is having a deterring effect, and migrants are less enticed to enter the country. "),
+                    h4("DHS credits the administration policy as the lowest apprehensions prior to this past April were in December of 2011. This new low is 7,000 apprehensions less than the previous. In a year since April 2016, apprehensions were down 62%, though there are multiple different reasons for such a change."),
+                    h4("Here you can find the monthly summaries of apprehensions by sector in a time series from 2000 to 2017 depicting the changes throughout time."),
+                    br(),
+            
+                    h5("Actual Trump Quotes Read by Cartoon Trump"),
+                    HTML('<iframe width="390" height="270" src="https://www.youtube.com/embed/DREO6cwbGeQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
+                    br(),
+                    h5("Powered by: "),
+                    tags$img(src= "RStudio-Ball.png",height = 50, width = 50, hspace = "10"), 
+                    tags$img(src= "CNN-Logo.png",height = 60, width = 70, hspace = "10"),
+                    tags$img(src= "git-desktop-logo.png",height = 60, width = 60, hspace = "20"),
+                    tags$img(src= "Youtube-logo-black.png",height = 60, width = 70)
+                   
+                  ),
+                  
+                  #Location of barplot
+                  mainPanel(
+                    tabsetPanel(
+                      tabPanel("Graph", plotOutput("appPlot", height = 500)),
+                      tabPanel("Table", tableOutput("table"))
+                      
+                    ),
+                    br(),
+                    br(),
+                    h3("Do You Want To Build a Wall? - Donald Trump (Frozen Parody)"),
+                    HTML('<iframe width="890" height="540" src="https://www.youtube.com/embed/GVN17U3Vg34" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>'),
+                    br(),
+                    h4('Whats the best way for United States president-elect Donald Trump to convince people that a wall between America and Mexico is a good idea?'),
+                    h4('Why, a song in the style of Frozens "Do You Want To Build a Snowman?" of course.'),
+                    h3('Enjoy!'),
+                    br()
+                  )
+                )
 )
 
 # Define server logic required to draw a histogram
@@ -87,9 +117,9 @@ server <- function(input, output) {
       par(bg = "black") # Plot Background Color
       
       barplot(as.matrix(mydata),main = "2010/2017 US. Apprehensions", beside = TRUE, xlab = "Months", ylab = "Apprehensions",
-        names.arg = months, 
-        col = c("limegreen", "maroon"), col.main = "white", font.main = 2,family = "mono", bty="n",axes = FALSE)
-    
+              names.arg = months, 
+              col = c("limegreen", "maroon"), col.main = "white", font.main = 2,family = "mono", bty="n",axes = FALSE)
+      
       xTicks <- c(2,5,8,11,14,17,20,23,26,29,32,35) # x Axis tick mark positions
       
       #Custom x and y axis
