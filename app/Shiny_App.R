@@ -33,7 +33,6 @@ ui <- fluidPage(theme = shinytheme("slate"),
                     selectInput('comp', 'Choose comparison', 
                                 choices = c('Monthly Summaries'= '10', 'Big Bend' = '1', 'Del Rio' = '2', 'El Centro' = '3', 'El Paso' = '4', 'Laredo' = '5', 'Rio Grande Valley' = '6', 'San Diego' = '7', 'Tuscon' = '8', 'Yuma' = '9'),
                                 selected = 'Big Bend'),
-                    
                     br(),
                     
                     # Cnn Report Video that was provided to us via Blackboard 
@@ -56,7 +55,7 @@ ui <- fluidPage(theme = shinytheme("slate"),
                     
                     #Logos
                     h5("Powered by: "),
-                    tags$img(src= "RStudio-Ball.png",height = 50, width = 50, hspace = "10"), 
+                    img(src= "RStudio-Ball.png",height = 50, width = 50, hspace = "10"), 
                     tags$img(src= "CNN-Logo.png",height = 60, width = 70, hspace = "10"),
                     tags$img(src= "git-desktop-logo.png",height = 60, width = 60, hspace = "20"),
                     tags$img(src= "Youtube-logo-black.png",height = 60, width = 70)
@@ -71,7 +70,16 @@ ui <- fluidPage(theme = shinytheme("slate"),
                       
                     ),
                     
-                    br(),br(),
+                    # Top 3 Apprehensions per years 2010 & 2017
+                    #max_apps_2010 <- tail(sort(mat["2010",]),3),
+                    #max_apps_2017 <- tail(sort(mat["2017",]),3),
+                    
+                    br(),
+                    h5("Top 3 highest Apprehensions for the year 2000 are:    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ Top 3 highest Apprehensions for the year 2000 are:"),
+                    h6("61361 for the month of March   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   46184 for the month of October"),
+                    h6("55237 for the month of April   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _  47211 for the month of November"),
+                    h6("47045 for the month of May   _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _   43251 for the month of December"),
+                    br(),
                     
                     #Video of Trump Singing "Do you want to build a wall" to Frozen background music
                     h3("Do You Want To Build a Wall? - Donald Trump (Frozen Parody)"),
@@ -120,6 +128,7 @@ server <- function(input, output) {
     #Take reactive data
     mydata <- selectedData()
     
+    # If not monthly Summaries then do this
     if (as.numeric(input$comp) != 10){
       #Plot the data
       
@@ -142,7 +151,7 @@ server <- function(input, output) {
     }
     else {
       
-      
+      # if monthly summaries is chosen then do this
       ts3 <- ts(rev(ts2), start = c(2000, 1), frequency=12)
       
       mat <- as.matrix(ts1)
@@ -152,8 +161,8 @@ server <- function(input, output) {
         element <- mean(mat[i,])
         avg_lst <- c(avg_lst,element)
       }
-      
-      avgVec <- as_vector(rev(avg_lst)) 
+
+      avgVec <- as.vector(rev(avg_lst)) 
       years <- c(2000:2017) #  will be used as a paramter for the points
       yearStr <- as.character(years) # Conversion of proir vector to Strings to be used as labels
       
@@ -181,3 +190,4 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+  
