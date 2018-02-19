@@ -1,0 +1,289 @@
+\documentclass{article}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\graphicspath{ {./graphs/} }
+
+\title{US-Mexico Border Apprehensions Sweave Report} 
+\author{Michael Rojas, Kerin Grewal}
+
+\usepackage{Sweave}
+\begin{document}
+\maketitle
+\SweaveOpts{concordance=TRUE}
+
+\pagebreak
+
+\section{CNN report Summary}
+
+\begin{center}
+
+US-Mexico boarder apprehensions have been steadily declining since 2000, and in April of 2017 they reached historic lows. These downward trends and record lows can be accredited to President Trump’s election. The data shows that President Trump’s aggression towards immigration laws is having a deterring effect, and migrants are less enticed to enter the country. DHS credits the administration policy as the lowest apprehensions prior to this past April were in December of 2011. This new low is 7,000 apprehensions less than the previous. In a year since April 2016, apprehensions were down 62%, though there are multiple different reasons for such a change.
+Here you can find the monthly summaries of apprehensions by sector in a time series from 2000 to 2017 depicting the changes throughout time.\\
+.\\
+
+Below is a link to the original story and Video that is linked to these Apprehensions\\
+
+\end{center}
+\url{https://www.cnn.com/2017/05/09/politics/border-crossings-apprehensions-down-trump/index.html}\\
+
+\begin{center}
+The following graph represents a Summary of the Apprehensions made at the US-Mexico border between the years 2000 through the year 2017. Each green marker represents the average apprehension rate for that year.\\
+.\\
+
+\end{center}
+
+
+\subsection{Figure 1}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=9cm, width=16cm]{SummaryPlot}
+\caption{Us Apprehension Summary Plot}
+\end{figure}
+
+.\\
+.\\
+It is seen from the figure above that Apprehensions throughout time have been slowly decreasing, and it is now as low as it once was back in the year 2011. This is being accredited to Donald Trumps aggression on border patrol and the desire to build a higher wall to prevent the US from having Mexicans or anybody fleeing their country to illegally cross the border into the states 
+
+\pagebreak
+
+\section{Top three Month Periods with the most Apprehensions}
+.\\
+Looking at the data and being able to manipulate and run a quick analysis on the apprehensions for both 2010 and 2017 we came up with the following conclusions for the most apprehensions in those years respectively by using the following scrypt:\\
+
+\begin{figure}[h]
+\centering
+\includegraphics{code}
+\caption{Code Executed To find Max Apprehensions}
+\end{figure}
+
+.\
+The following is the output of the code executed above:\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=3cm, width=18cm]{Top3}
+\caption{Max Apprehensions For the Years 2010 and 2017}
+\end{figure}
+
+\section{Change in Maximum}
+
+Using simple statistical tests like those demonstrated in class we were able to compare the sector with the most apprehensions for 2010 and with the sector with the most apprehensions in 2017. Depicted in the graph above It is noted that the maximum apprehensions for the year 2010 was 61361 for the month of March and the maximum apprehensions for the year 2017 was 47211 for the month of November. The difference in Apprehensions was a total of 14150 people that were being detained or sent back home.
+
+\pagebreak
+
+\section{Data Visualizations}
+
+Using R's built-in plotting methods, we are able to visualize US-Mexico Apprehension data, camparing the 2010 and 2017 statistics by month and sector. By using simple statistical tests like those demonstrated in class we are able to demonstrate side by side visualizations of the years 2010 and 2017 comparing the data by sector.\\
+
+
+In the following plots you will be able to visualize the differences in years According to sector Beggining with:\\
+
+
+\subsection{Big Bend}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=9cm, width=16cm]{BigBend}
+\caption{Sector: Big Bend Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics{BigBendTable}
+\caption{Sector: Big Bend Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{Del Rio}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{DelRio}
+\caption{Sector: Del Rio Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{dRiopic}
+\caption{Del Rio}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{DelRioTable}
+\caption{Sector: Del Rio Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{El Centro}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{ElCentro}
+\caption{Sector: El Centro Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{ElCentropic}
+\caption{El Centro}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{ElCentroTable}
+\caption{Sector: El Centro Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{El Paso}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{ElPaso}
+\caption{Sector: El Paso Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{ElPasopic}
+\caption{El Paso}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{ElPasoTable}
+\caption{Sector: El Paso Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{Laredo}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{Laredo}
+\caption{Sector: Laredo Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{Laredopic}
+\caption{Laredo}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{LaredoTable}
+\caption{Sector: Laredo Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{Rio Grande Valley}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{RioGrandeValley}
+\caption{Sector: Rio Grande Valley Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{RioGrandepic}
+\caption{Rio Grande Valley}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{RioGrandeValleyTable}
+\caption{Sector: Rio Grande Valley Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{SanDiego}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{SanDiego}
+\caption{Sector: SanDiego Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{SanDiegopic}
+\caption{SanDiego}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{SanDiegoTable}
+\caption{Sector: SanDiego Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{Tucson}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{Tucson}
+\caption{Sector: Tucson Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{Tucsonpic}
+\caption{Tucson}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{TucsonTable}
+\caption{Sector: Tucson Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\subsection{Yuma}
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=8cm, width=16cm]{Yuma}
+\caption{Sector: Yuma Apprehensions Plot}
+\end{figure}
+.\\
+
+\begin{figure}[h]
+\centering
+\includegraphics[ height=4cm, width=11cm]{Yumapic}
+\caption{Yuma}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics{YumaTable}
+\caption{Sector: Yuma Apprehensions Table}
+\end{figure}
+
+\pagebreak
+
+\end{document}
+
