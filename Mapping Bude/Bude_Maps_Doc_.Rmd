@@ -1,0 +1,191 @@
+---
+title: "Bude_Maps_Doc"
+author: "Michael Rojas"
+date: "3/22/2018"
+output: html_document
+---
+
+# Western England Maps (Road, WaterColor) of Bude
+### Including Bude Itself, Cricket Grounds, Local Beaches, Tidal Swimming Pool, and Local Pub
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo =TRUE)
+```
+
+
+```{r}
+# Google Api Key in order to get rid of Query Limit Error
+#googleKey <- "AIzaSyANzSVR1fVBwRLFj8fInL3-U33kqHeeCbg"
+#register_google(key = googleKey)
+```
+
+### Libraries Used
+```{r}
+library(ggmap)
+library(ggplot2)
+library(tidyverse)
+library(maps)
+```
+
+### DataFrame of Longitude & Latitude Data for Points of Interest
+```{r, echo=TRUE}
+myDF <- data.frame(
+  Points_Of_Interest = c(
+    "Bude", "Summerleaze Beach", "Bude Tidal Swimming Pool",
+    "Crooklets Beach", "The Barrel at Bude", "Bude North Cornwall Cricket Club"
+  ),
+
+  longitude = c(-4.543678, -4.5513, -4.5540, -4.553762, -4.543023, -4.552814),
+  latitude = c(50.8261, 50.8305, 50.8326, 50.83587, 50.83007, 50.83347),
+
+  Type = c("Bude", "Summerleaze Beach", "Tidal Swimming Pool", "Crooklets Beach", "Pub: The Barrel at Bude", "Cricket Grounds"),
+  stringsAsFactors = FALSE
+)
+```
+
+#### Possible Error that might come up for the Pub Route:
+
+"Error in rep(LETTERS[k], stepsPerRoute[k]) : invalid 'times' argument"
+
+#### Dont know why but this error comes up sometimes, Just reRun code 
+
+
+## Pub Route
+```{r, echo=TRUE}
+from <- "Bude North Cornwall Cricket Club"
+to <- "The Barrel at Bude"
+route_df <- route(from, to, structure = "route")
+```
+
+
+#### Possible Error that might come up for no reason for the DataFrame:
+
+"Error in data.frame(ll.lat = ll[1], ll.lon = ll[2], ur.lat = ur[1], ur.lon = ur[2]) : arguments imply differing number of rows: 0, 1"
+
+#### Dont know why but this error comes up sometimes, Just reRun code  
+
+
+
+![](http://www.cornwall-online.co.uk/north-cornwall/bude/bude-cornwall1.jpg)
+
+
+The popularity of Bude as a seaside resort dates from Victorian timesBude has managed to retain its atmosphere of easy going charm whilst catering for the most discerning of modern day tourists.
+
+The town overlooks a wide bay of hard golden sand flanked by spectacular cliffs and protected by a breakwater. There is a seawater swimming pool under Summerleaze Downs which means safety for swimmers even at low tide. Bude's Sea pool is approximately 290 feet long by 140 feet wide with a walkway around the edge.
+
+Two excellent lifeguard patrolled beaches - Crooklets and Summerleaze - have extensive flat sands when the tide is out and are perfect for beach lovers of all ages. As well as the seawater pool, Bude now also boasts a large heated indoor leisure pool with flume, wave machine and cafe. Laser dome, trampolines, putting, floodlit tennis courts, mini-golf and go-karting close to the beaches all add to the family fun.
+
+
+
+## Road Map
+```{r, echo = TRUE}
+bude_map <- get_map("Summerleaze Beach", zoom = 15)
+ggmap(bude_map) +
+
+  # Title and Axis Labeling
+  print(ggtitle("Bude, Western England \n Road Map")) +
+  print(labs(y = "Latitude", x = "Longitude")) +
+
+  # Pretty Printing (Title,Axis,Legend Modifications)
+  theme(
+    plot.title = element_text(family = "Helvetica", colour = "steelblue4", face = "bold", size = (15), hjust = 0.5),
+    legend.title = element_text(family = "Helvetica", colour = "steelblue4", face = "bold.italic"),
+    legend.text = element_text(family = "Helvetica", colour = "steelblue4", face = "bold.italic"),
+    axis.title = element_text(family = "Helvetica", face = "bold.italic", size = (12), colour =        "steelblue4")) +
+
+  # Literal Plotted Points of Interest & Pub Route
+  geom_point(data = myDF, aes(x = longitude, y = latitude, color = Type), size = 3) +
+  geom_path(aes(x = lon, y = lat), colour = "red", size = 1.5, data = route_df, lineend = "round") +
+  scale_colour_manual(values = c("sienna2", "limegreen","steelblue4", "red4","steelblue3", "turquoise1"))
+```
+
+
+# England's most beautiful Cricket Grounds
+
+![](https://www.telegraph.co.uk/content/dam/Travel/galleries/travel/destinations/europe/uk/Englands-most-beautiful-cricket-grounds/cricket-bude_3378037a.jpg)
+
+Bude North Cornwall Cricket Club is situated on the clifftops overlooking the Atlantic Ocean, and is quite simply one of the most stunning locations you could ever wish to visit, let alone play cricket at! 
+Bude North Cornwall Cricket Club was founded in 1870. Over the years it has played host to Hockey matches, Tennis, Cricket and even used for Mortar practice in WW2!
+Bude played only friendly matches until the late 1970's, entertaining local and touring sides throughout the summer months. Since joining the Cornwall Cricket League the club has held various league honours and still continues to host touring teams from around the world.
+
+
+# Crooklets Beach
+
+
+![](https://www.visitbude.info/wp-content/uploads/2015/04/Crooklets-Beach.jpg)
+
+Although a little pebbly at the top, Crooklets offers a huge expanse of golden sand and rock pools to explore once the tide is out. It is popular with surfers, but also families who would prefer a beach without dogs.
+
+There are lots of beach huts available to hire.
+
+Ideal for: Surfing and beach games.
+Accessibility: A decent sized car park, from which there is level access.
+Facilities: Sea front café, public toilets, outdoor shower, beach huts for hire
+Lifeguard Cover: 6th May to 27th September (daily)
+Best time to surf: All tides
+Dog Friendly? Dogs banned Easter to 1st Oct.
+Location: EX23 8NF – 0.8 miles north of Bude Town centre
+
+# The Barrel at Bude
+
+![](http://www.hotels-stay.co.uk/hotel-photos/cornwall/bude/hotel-121536.jpg)
+
+![](http://z9n7wj6e8r337cq41ifpu1gu.wpengine.netdna-cdn.com/wp-content/uploads/2017/11/barreldowr1117e.jpg)
+![](https://ssl-visitbude-y4swji4zamaelbcx.netdna-ssl.com/wp-content/uploads/2017/08/Logo-150x150.jpg)
+
+Sunday in Bude – glorious autumn sun, rolling waves, but it’s a different sort of barrel I’m here for.
+It’s the middle of the afternoon and the Barrel at Bude micropub is filled to capacity. Acoustic singer guitarist Michael Guild is captivating the drinkers, but the object of my drive up from Hayle is on the solid wooden bar top.
+Micropub owners Ian and Rachel O’Hare and Dowr Kammel Brewing’s Simon and Justine Carruthers have teamed up to create a bespoke range of brews for the venue, with one launched in bottle already and two other available on tap.
+Having, unfortunately, to drive, I went for half of the 6% ABV Lager, happy to find that the malt bill included Vienna Malt. I’m a sucker for Vienna malt which delicious richness, smoothness and a deep, yet not cloying sweetness. Interestingly, though, the beer – in fact all of Simon’s beers – features his own Cornish-grown Perle hops. Being in the Camel Valley, he enjoys growing conditions similar to the vineyard and these seem to favour hops.
+
+
+# SummerLeaze Beach
+
+![](http://www.visitbude.info/wp-content/uploads/2015/05/young-surfers-at-Summerleaze-663.jpg)
+
+Located within easy walking distance of Bude town centre Summerleaze is a popular beach. However, the extensive sands in every direction mean at anything except high tide it is unlikely to feel crowded.
+Summerleaze is also an unusually interesting beach with a large breakwater complete with tower protecting a small harbour and the mouth of the Bude canal with its massive lock gates. On the opposite side of the beach there's a sea-water bathing pool making for safe bathing whatever the conditions. Backing onto the beach are grassy downs and the River Neet. Beautiful Sandy beach allowing Dogs all Year while on leash :).
+
+# Tidal Swimming Pool at Bude
+
+![](http://budeandbeyond.co.uk/wp-content/uploads/2013/06/FoBSP-RobKeir-Picnic4.jpg)
+
+The tidal swimming Pool at Bude has been at the heart of the community for over 80 years. So FoBSP, the local charity which now funds and runs the Sea Pool, wanted to give locals and visitors a chance to get-together and enjoy themselves by the seaside as part of the Eden Project’s annual Big Lunch celebration on Sunday 2nd June 2013.
+
+Some 600 people stopped by during the day to swim, splash, snooze and smile. Heaps of people got their feet wet and sprawled in the sunshine; ate great grub and chilled out listening to the soulful singing of the GMC Choir, Tony Wade’s acoustic chums, and the Big Dog Boogie Band. The Sea Pool soon filled with inflatable dolphins, rubber rings and even a boat or two, all quietly watched over by the vigilant FoBSP lifeguards. Sea Pool sponsor Life’s A Beach organised a bountiful barbecue serving fresh local produce, which contributed over £300 to the day’s takings. FoBSP were delighted to welcome ten new members to the volunteer group – annual membership costs just £10 and underpins the Pool’s finances. The FoBSP team were kept busy all afternoon, explaining the history of the historic Pool to newcomers and selling funky FoBSP pens and wristbands. In total, the day raised over £500 for the Pool’s ongoing renovation.
+
+More importantly, the Picnic at the Pool provided a wonderful opportunity for locals and visitors to relax and enjoy the Sea Pool’s facilities with added entertainment.
+
+
+![](http://budeandbeyond.co.uk/wp-content/uploads/2013/06/FoBSP-RobKeir-Picnic2-800x434.jpg)
+
+
+#### Possible Error that might come up for no reason:
+
+"Error in data.frame(ll.lat = ll[1], ll.lon = ll[2], ur.lat = ur[1], ur.lon = ur[2]) : arguments imply differing number of rows: 0, 1"
+
+#### Dont know why but this error comes up sometimes, Just reRun code  
+
+
+
+## WaterColor Map
+```{r ,echo = TRUE}
+bude_Watermap <- get_map("Summerleaze Beach", source = "stamen", maptype = "watercolor", zoom = 15)
+ggmap(bude_Watermap) +
+
+  # Title and Axis Labeling
+  print(ggtitle("Bude, Western England \nWaterColor Map")) +
+  print(labs(y = "Latitude", x = "Longitude")) +
+
+  # Pretty Printing (Title,Axis,Legend Modifications)
+  theme(
+    plot.title = element_text(family = "Helvetica", colour = "steelblue4", face = "bold", size = (15), hjust = 0.5),
+    legend.title = element_text(family = "Helvetica", colour = "steelblue4", face = "bold.italic"),
+    legend.text = element_text(family = "Helvetica", face = "bold.italic", colour = "steelblue4"),
+    axis.title = element_text(family = "Helvetica", face = "bold.italic", size = (12), colour =        "steelblue4")) +
+
+  # Literal Plotted Points of Interest & Pub Route
+  geom_point(data = myDF, aes(x = longitude, y = latitude, color = Type), size = 3) +
+  geom_path(aes(x = lon, y = lat), colour = "red", size = 1.5, data = route_df, lineend = "round") +
+  scale_colour_manual(values = c("sienna2", "limegreen","steelblue4", "red4","steelblue3", "turquoise1"))
+```
